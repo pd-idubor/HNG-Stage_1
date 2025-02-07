@@ -49,19 +49,20 @@ const getFunFact = async (num) => {
 
 app.get('/api/classify-number', async (req, res) => {
   try {
-    const number = parseInt(req.query.number);
-   
+    const number = +(req.query.number);
+    console.log(number);
+    console.log(typeof(number)); 
     //Number Check
-    if (isNaN(number)) {
+    if (isNaN(number) || typeof(number) !== 'number' || !Number.isInteger(number)) {
       return res.status(400).json({
-	'number': 'alphabet',
+	'number': req.query.number,
 	'error': true
       });
     };
     
     //Properties
     const properties = [];
-    const armValues = isArmstrong(number);
+    const armValues = isArmstrong(-(number));
     if (armValues['val']) properties.push('armstrong');
     if (number % 2 == 0) {
       properties.push('even');
