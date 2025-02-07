@@ -76,7 +76,7 @@ app.get('/api/classify-number', async (req, res) => {
       'is_prime': isPrime(number),
       'is_perfect': isPerfect(number),
       'properties': properties,
-      'digit_sum': armValues['sum'],
+      'digit_sum': number.toString().split('').reduce((acc, digit) => acc + Number(digit), 0),
       'fun_fact': await getFunFact(number)
     }
 
